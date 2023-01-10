@@ -3,6 +3,7 @@ import cors from 'cors';
 import express, { json } from 'express';
 import helmet from 'helmet';
 
+import routes from './api/routes';
 import connect from './utils/connect';
 
 const HOST = config.get<string>('host');
@@ -14,12 +15,10 @@ server.use(helmet());
 server.use(cors());
 server.use(json());
 
-server.get('/', (request, response) => {
-	response.sendStatus(200);
-});
-
 server.listen(PORT, async () => {
 	console.log(`SERVER RUNNING AT http://${HOST}:${PORT}`);
 
 	await connect();
+
+	routes(server);
 });
