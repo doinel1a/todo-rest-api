@@ -5,8 +5,7 @@
 # vendor
 
 # testing
-/coverage
-/test-results
+/__tests__
 
 # production
 /dist

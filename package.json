@@ -9,6 +9,8 @@
 		"lint": "npx eslint --ext ts ./",
 		"lint:fix": "npx eslint --ext ts ./ --fix",
 		"test": "jest",
+		"test:watch": "jest --watchAll",
+		"test:doh": "jest --detectOpenHandles",
 		"dev": "yarn lint & ts-node-dev --respawn --transpile-only src/index.ts",
 		"build": "yarn lint & yarn clean & tsc",
 		"start": "node dist/src/index.js"
