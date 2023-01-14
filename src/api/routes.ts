@@ -1,6 +1,7 @@
 import { Express, Request, Response } from 'express';
 
 import secondsToHMS from '../utils/seconds-to-hms';
+import createUserController from './users/users.controller';
 
 function routes(server: Express) {
 	server.get('/api/healthcheck', (request: Request, response: Response) => {
@@ -20,6 +21,8 @@ function routes(server: Express) {
 			response.status(500).send(healthCheck);
 		}
 	});
+
+	server.post('/api/users', createUserController);
 }
 
 export default routes;
