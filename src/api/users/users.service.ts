@@ -1,9 +1,8 @@
 import { omit } from 'lodash';
-import { DocumentDefinition } from 'mongoose';
 
-import UserModel, { UserDocument } from './user.model';
+import UserModel, { UserInput } from './user.model';
 
-async function createUser(input: DocumentDefinition<UserDocument>) {
+async function createUser(input: UserInput) {
 	try {
 		const user = await UserModel.create(input);
 		return omit(user.toJSON(), 'password');
