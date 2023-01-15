@@ -1,4 +1,4 @@
-import { genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcrypt';
 import config from 'config';
 import { Document, model, Schema } from 'mongoose';
 
@@ -47,6 +47,14 @@ UserSchema.pre('save', async function (next) {
 
 	return next();
 });
+
+UserSchema.methods.comparePassword = async function (
+	candidatePassword: string
+) {
+	const user = this as UserDocument;
+
+	return compare(candidatePassword, user.password).catch(() => false);
+};
 
 const UserModel = model<UserDocument>('User', UserSchema);
 
