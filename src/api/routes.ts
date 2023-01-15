@@ -1,6 +1,8 @@
 import { Express, Request, Response } from 'express';
 
 import secondsToHMS from '../utils/seconds-to-hms';
+import validateResource from './middleware/validate-resource';
+import createUserSchema from './users/user.schema';
 import createUserController from './users/users.controller';
 
 function routes(server: Express) {
@@ -22,7 +24,11 @@ function routes(server: Express) {
 		}
 	});
 
-	server.post('/api/users', createUserController);
+	server.post(
+		'/api/users',
+		validateResource(createUserSchema),
+		createUserController
+	);
 }
 
 export default routes;
