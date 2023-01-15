@@ -2,10 +2,13 @@ import { genSalt, hash } from 'bcrypt';
 import config from 'config';
 import { Document, model, Schema } from 'mongoose';
 
-interface UserDocument extends Document {
+interface UserInput {
 	email: string;
 	name: string;
 	password: string;
+}
+
+interface UserDocument extends UserInput, Document {
 	createdAt: Date;
 	updatedAt: Date;
 	comparePassword(candidatePassword: string): Promise<boolean>;
@@ -48,4 +51,4 @@ UserSchema.pre('save', async function (next) {
 const UserModel = model<UserDocument>('User', UserSchema);
 
 export default UserModel;
-export { UserDocument };
+export { UserDocument, UserInput };
